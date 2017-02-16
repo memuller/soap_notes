@@ -1,13 +1,42 @@
-<html ng-app='helloWorld'>
+<html ng-app='Phonebook'>
   <head>
-    <title>Hello World</title>
-    <script src='angular.min.js'></script>
-    <meta charset="UTF-8"> 
+    <meta charset="UTF-8">
+    <title>Lista telefônica</title>
+    <script src='lib/angular.min.js'></script>
     <script src='app.js'></script>
+    <style media="screen" src="lib/bootstrap-3.3.7-dist/bootstrap.min.css"></style>
+    <style media="screen" src="lib/bootstrap-3.3.7-dist/bootstrap-theme.min.css"></style>
   </head>
   <body>
-    <div ng-controller='helloWorldCtrl'>
-      {{message}}
+    <div ng-controller='PhonebookController'>
+      <h4 ng-bind='app'></h4>
+      <table ng-show='contacts.length > 0'>
+        <tr>
+          <th></th>
+          <th>Name</th>
+          <th>Phone</th>
+          <th>Operator</th>
+        </tr>
+        <tr ng-repeat='contact in contacts'>
+          <td><input type="checkbox" ng-model='contact.selected'></td>
+          <td>{{contact.name}}</td>
+          <td>{{contact.phone}}</td>
+          <td>{{contact.phoneOperator.name}}</td>
+        </tr>
+      </table>
+      <div>
+        <form name="contactForm">
+          <input class='form-control' type="text" ng-model='contact.name' ng-required='true'>
+          <input class='form-control' type="text" ng-model='contact.phone' ng-required='true'>
+          <select class='form-control' ng-model='contact.phoneOperator'
+            ng-options='operator.name group by operator.category for operator in phoneOperators'>
+            <option value="">select phone operator</option>
+          </select>
+          <input class='btn btn-block' type="button" value='Insert' ng-click='addContact(contact)' ng-disabled='contactForm.$invalid'>
+          <input class='btn btn-block' type="button" value='Delete' ng-click='removeContact(contacts)' ng-disabled='!someSelected(contacts)'>
+          <div class='alert' ng-show='contactForm.$invalid'></div>
+        </form>
+      </div>
     </div>
   </body>
 </html>
