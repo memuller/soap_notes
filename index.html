@@ -1,42 +1,46 @@
-<html ng-app='Phonebook'>
+<!DOCTYPE html>
+<html ng-app='SOAPNotes'>
   <head>
     <meta charset="UTF-8">
-    <title>Lista telefônica</title>
+    <title>{{title}}</title>
     <script src='lib/angular.min.js'></script>
     <script src='app.js'></script>
-    <style media="screen" src="lib/bootstrap-3.3.7-dist/bootstrap.min.css"></style>
-    <style media="screen" src="lib/bootstrap-3.3.7-dist/bootstrap-theme.min.css"></style>
+    <link rel='stylesheet' href="lib/bootstrap-3.3.7-dist/css/bootstrap.min.css"></style>
+    <link rel='stylesheet' href="lib/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css"></style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src='lib/bootstrap-3.3.7-dist/js/bootstrap.min.js'></script>
   </head>
-  <body>
-    <div ng-controller='PhonebookController'>
-      <h4 ng-bind='app'></h4>
-      <table ng-show='contacts.length > 0'>
-        <tr>
-          <th></th>
-          <th>Name</th>
-          <th>Phone</th>
-          <th>Operator</th>
-        </tr>
-        <tr ng-repeat='contact in contacts'>
-          <td><input type="checkbox" ng-model='contact.selected'></td>
-          <td>{{contact.name}}</td>
-          <td>{{contact.phone}}</td>
-          <td>{{contact.phoneOperator.name}}</td>
-        </tr>
-      </table>
-      <div>
-        <form name="contactForm">
-          <input class='form-control' type="text" ng-model='contact.name' ng-required='true'>
-          <input class='form-control' type="text" ng-model='contact.phone' ng-required='true'>
-          <select class='form-control' ng-model='contact.phoneOperator'
-            ng-options='operator.name group by operator.category for operator in phoneOperators'>
-            <option value="">select phone operator</option>
-          </select>
-          <input class='btn btn-block' type="button" value='Insert' ng-click='addContact(contact)' ng-disabled='contactForm.$invalid'>
-          <input class='btn btn-block' type="button" value='Delete' ng-click='removeContact(contacts)' ng-disabled='!someSelected(contacts)'>
-          <div class='alert' ng-show='contactForm.$invalid'></div>
-        </form>
+  <body ng-controller='SOAPController'>
+    <nav class="navbar navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="" class="navbar-brand">
+            {{title}}
+          </a>
+        </div>
+        <div id="navbar" class='collapse navbar-collapse'>
+          <ul class="nav navbar-nav">
+            <li>New</li>
+            <li>by Patient</li>
+            <li>by Date</li>
+          </ul>
+        </div>
       </div>
+    </nav>
+    <div id="" class="container">
+      <section id='list'>
+        <form name='search'>
+          <input type="text" name='text' style='form-control text' ng-model='text'>
+        </form>
+        <ul class='patients' ng-if='patients'>
+          <li>
+            <a href="">New patient</a>
+          </li>
+          <li ng-repeat='patient in patients | filter:{name: text}'>
+            <a href="">{{patient.name}}</a>
+          </li>
+        </ul>
+      </section>
     </div>
   </body>
 </html>
