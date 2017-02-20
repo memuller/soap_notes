@@ -14,23 +14,23 @@ app.config(($routeProvider) => {
       controller: 'NotesController',
       templateUrl: 'pages/noteNew.html'
     })
-    .when('/note', {
+    .when('/note/:noteId', {
       controller: 'NotesController',
-      templateURL: 'pages/noteView.html'
+      templateUrl: 'pages/noteView.html'
     })
 
 })
 
-app.controller('ListsController', ($scope) => {
+app.controller('ListsController', function($scope) {
   $scope.patients = [
     {name: 'lucas'}, {name: 'devard'}, {name: 'demostenes'}
   ]
 })
 
-app.controller('NotesController', ($scope) => {
+app.controller('NotesController', function($scope) {
 
 })
 
-app.controller('SOAPController', ($scope) => {
+app.controller('SOAPController', function($scope) {
   $scope.title = 'SOAP Notes'
 })

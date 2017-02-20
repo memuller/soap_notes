@@ -1,0 +1,13 @@
+<section id='list' ng-controller='ListsController'>
+  <form name='search'>
+    <input type="text" name='text' style='form-control text' ng-model='text'>
+  </form>
+  <ul class='patients' ng-if='patients'>
+    <li>
+      <a href="">New patient</a>
+    </li>
+    <li ng-repeat='patient in patients | filter:{name: text}'>
+      <a href="">{{patient.name}}</a>
+    </li>
+  </ul>
+</section>

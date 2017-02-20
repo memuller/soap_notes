@@ -16,7 +16,7 @@
     <script src='app.js'></script>
 
   </head>
-  <body ng-controller='ListsController'>
+  <body>
     <nav class="navbar navbar-static-top">
       <div class="container">
         <div class="navbar-header">
@@ -33,20 +33,8 @@
         </div>
       </div>
     </nav>
-    <div id="" class="container">
-      <section id='list'>
-        <form name='search'>
-          <input type="text" name='text' style='form-control text' ng-model='text'>
-        </form>
-        <ul class='patients' ng-if='patients'>
-          <li>
-            <a href="">New patient</a>
-          </li>
-          <li ng-repeat='patient in patients | filter:{name: text}'>
-            <a href="">{{patient.name}}</a>
-          </li>
-        </ul>
-      </section>
+    <div id="" class="container" ng-view>
+
     </div>
   </body>
 </html>
