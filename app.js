@@ -4,15 +4,15 @@ app.config(($routeProvider) => {
   $routeProvider
     .when('/', {
       controller: 'ListsController',
-      templateURL: 'pages/home.html'
+      templateUrl: 'pages/home.html'
     })
     .when('/log', {
       controller: 'ListsController',
-      templateURL: 'pages/log.html'
+      templateUrl: 'pages/log.html'
     })
     .when('/new', {
       controller: 'NotesController',
-      templateURL: 'pages/noteNew.html'
+      templateUrl: 'pages/noteNew.html'
     })
     .when('/note', {
       controller: 'NotesController',
