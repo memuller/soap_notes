@@ -3,12 +3,18 @@
   <head>
     <meta charset="UTF-8">
     <title>{{title}}</title>
-    <script src='lib/angular.min.js'></script>
+
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="node_modules/angular-material/angular-material.css">
+
+    <script src="node_modules/angular/angular.js"></script>
+    <script src="node_modules/angular-aria/angular-aria.js"></script>
+    <script src="node_modules/angular-animate/angular-animate.js"></script>
+    <script src="node_modules/angular-material/angular-material.js"></script>
+    <script src='node_modules/angular-route/angular-route.js'></script>
+
     <script src='app.js'></script>
-    <link rel='stylesheet' href="lib/bootstrap-3.3.7-dist/css/bootstrap.min.css"></style>
-    <link rel='stylesheet' href="lib/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css"></style>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-    <script src='lib/bootstrap-3.3.7-dist/js/bootstrap.min.js'></script>
+
   </head>
   <body ng-controller='SOAPController'>
     <nav class="navbar navbar-static-top">
