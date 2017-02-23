@@ -4,7 +4,7 @@
   </form>
   <ul class='patients' ng-if='patients'>
     <li>
-      <a href="">New patient</a>
+      <a href="#!/new?name=text">New patient</a>
     </li>
     <li ng-repeat='patient in patients | filter:{name: text}'>
       <a href="">{{patient.name}}</a>

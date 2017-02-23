@@ -1,6 +1,6 @@
 const app = angular.module('SOAPNotes', ['ngRoute', 'ngMaterial'])
 
-app.config(($routeProvider) => {
+app.config(($routeProvider, $locationProvider) => {
   $routeProvider
     .when('/', {
       controller: 'ListsController',
@@ -19,6 +19,8 @@ app.config(($routeProvider) => {
       templateUrl: 'pages/noteView.html'
     })
 
+  // would really prefer this, but it's not working right now.
+  //$locationProvider.html5Mode(true)
 })
 
 app.controller('ListsController', function($scope) {
