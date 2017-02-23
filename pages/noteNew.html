@@ -1,0 +1,10 @@
+<section id='new' ng-controller='NotesController'>
+  <form name='noteForm' ng-submit='newNote()'>
+    <input type="text" name='patientName' style='form-control text' ng-model='note.patientName'>
+    <textarea ng-model='note.subjective' name="subjective" cols="30" rows="6"></textarea>
+    <textarea ng-model='note.objective' name="objective" cols="30" rows="6"></textarea>
+    <textarea ng-model='note.assessment' name="assessment" cols="30" rows="6"></textarea>
+    <textarea ng-model='note.plan' name="plan" cols="30" rows="6"></textarea>
+    <input type="submit" value='Create Note'>
+  </form>
+</section>
