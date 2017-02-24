@@ -23,10 +23,10 @@ app.config(($routeProvider, $locationProvider) => {
   //$locationProvider.html5Mode(true)
 })
 
-app.controller('ListsController', function($scope) {
-  $scope.patients = [
-    {name: 'lucas'}, {name: 'devard'}, {name: 'demostenes'}
-  ]
+app.controller('ListsController', function($scope, Notes) {
+  const notes = Notes.list()
+  $scope.notes = notes
+})
 })
 
 app.controller('NotesController', function($scope) {
