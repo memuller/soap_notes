@@ -23,10 +23,26 @@ app.config(($routeProvider, $locationProvider) => {
   //$locationProvider.html5Mode(true)
 })
 
-app.controller('ListsController', function($scope, Notes) {
-  const notes = Notes.list()
+app.controller('ListsController', function($scope, $location, Note, Patient, $q) {
+  const notes = Note.list()
+  const patients = Patient.list()
+
   $scope.notes = notes
-})
+  $scope.patients = (query) => {
+    return $q((resolve,reject) => {
+      resolve(patients.filter((item) => item.name.includes(query)))
+    })
+  }
+
+  $scope.goToNote = (note) => $location.path(`/note/${note.id}`)
+  $scope.newNote = (patient) => $location.path(`/new/${patient.id}`)
+  $scope.createPatientAndGoToNewNote = (patientName) => {
+    const patient = new Patient( { name: patientName } )
+    patient.save()
+    $location.path(`/new/${patient.id}`)
+  }
+  $scope.goToPatient = (note) => console.log('not implemented')
+
 })
 
 app.controller('NotesController', function($scope) {

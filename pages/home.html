@@ -1,13 +1,25 @@
-<section id='list' ng-controller='ListsController'>
-  <form name='search'>
-    <input type="text" name='text' style='form-control text' ng-model='text'>
+<section id='search' ng-controller='ListsController as control'>
+  <form ng-submit="$event.preventDefault()">
+    <md-autocomplete
+    md-items="patient in patients(query)"
+    md-no-cache='true'
+    md-selected-item-change='newNote(patient)'
+    md-selected-item='selected'
+    md-search-text='query'
+    md-item-text="patient.name"
+    placeholder="type an existing or new patient name"
+  >
+    <md-item-template>
+      <span class="item-title">{{patient.name}}</span>
+      <md-button class='md-secondary' ng-click='goToPatient(patient.id)'>Notes</md-button>
+    </md-item-template>
+    <md-not-found>
+      Patient named {{query}} not found.
+      <md-button ng-click='createPatientAndGoToNewNote(query)'>Create it</md-button>
+    </md-not-found>
+  </md-autocomplete>
   </form>
-  <ul class='patients' ng-if='patients'>
-    <li>
-      <a href="#!/new?name=text">New patient</a>
-    </li>
-    <li ng-repeat='patient in patients | filter:{name: text}'>
-      <a href="">{{patient.name}}</a>
-    </li>
-  </ul>
+</section>
+<section id='log' ng-controller='ListsController' ng-include="listView">
+  
 </section>
