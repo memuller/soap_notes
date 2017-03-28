@@ -12,36 +12,63 @@
    // * sets object's id;
    // * sets object's timestamp.
    constructor (params){
+     if(!params.id){
+       this.id = (new Date()).valueOf()
+       this.createdAt = new Date()
+     }
      for(let property in params){
        this[property] = params[property]
      }
-
-     this.id = (new Date()).valueOf()
-     this.createdAt = new Date()
    }
 
-   // returns the list of all objects
-   static list(){
+   // fetches list of all objects, straight from LocalStorage
+   static fetch(){
      return JSON.parse(localStorage.getItem(this.keyName())) || []
    }
 
-   // pushes a given object to storage
-   static push (object) {
-     const objects = this.list()
-     objects.push(object)
+   // stores the list given to LocalStorage
+   static store(objects){
      localStorage.setItem(this.keyName(), JSON.stringify(objects))
-     return object
    }
 
-   // creates and stores an object
-   static save (object) {
-     return this.push( new this(object) )
+   // fetches list of all objects, then return them as new Object()
+   static list(){
+     return this.fetch().map( (item) => new this(item) )
+   }
+
+   // stores an object:
+   // * if there's no item with this ID yet, appends to the end of the current
+   //   objects list then saves it.
+   // * if theres an item w/ this ID, overwrites it in the list, then saves it.
+   // returns the saved object.
+   save (){
+     const id = this.id
+     const objects = this.constructor.fetch()
+
+     const index = objects.findIndex( (item) => item.id == id )
+
+     if(index != -1){
+       objects[index] = this
+     } else {
+       objects.push(this)
+     }
+
+     this.constructor.store(objects)
+
+     return this.constructor.get(id)
    }
 
    // fetches a specific object, by id
    static get (id) {
-     const objects = this.list()
-     return objects.find( (item) => item.id == id )
+     const objects = this.fetch()
+     return new this(objects.find( (item) => item.id == id ))
+   }
+
+   // returns an StoredObject whose id is saved at the PARAMId property.
+   // ORM-like behavior for relationships.
+   object (klass){
+     const fieldName = `${klass.name.toLowerCase()}Id`
+     return klass.get(this[fieldName])
    }
  }
 
