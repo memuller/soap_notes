@@ -3,26 +3,41 @@ const app = angular.module('SOAPNotes', ['ngRoute', 'ngMaterial', 'ngMdIcons'])
 app.config(($routeProvider, $locationProvider) => {
   $routeProvider
     .when('/', {
-      controller: 'ListsController',
-      templateUrl: 'pages/home.html'
+      title:        'New Note',
+      controller:   'ListsController',
+      templateUrl:  'pages/home.html'
     })
     .when('/log', {
-      controller: 'ListsController',
-      templateUrl: 'pages/log.html'
+      title:        'Notes by Date',
+      controller:   'ListsController',
+      templateUrl:  'pages/log.html'
     })
-    .when('/new', {
-      controller: 'NotesController',
-      templateUrl: 'pages/noteNew.html'
+    .when('/new/:patientId', {
+      title:        'Creating Note',
+      controller:   'NoteCreationController',
+      templateUrl:  'pages/noteNew.html'
     })
-    .when('/note/:noteId', {
-      controller: 'NotesController',
-      templateUrl: 'pages/noteView.html'
+    .when('/note/:id', {
+      title:        'Note',
+      controller:   'NoteViewController',
+      templateUrl:  'pages/noteView.html'
     })
 
   // would really prefer this, but it's not working right now.
   //$locationProvider.html5Mode(true)
 })
 
+// sets $scope.title to title specified in the route definitions.
+// * title.nav is meant for use in the main nav;
+// * title.page is for the HTML <title> attribute.
+app.run(['$rootScope', ($rootScope) => {
+  $rootScope.$on('$routeChangeSuccess', (e, current, previous) => {
+    $rootScope.title = {
+      nav: current.$$route.title,
+      page: `SOAP Notes: ${current.$$route.title}`
+    }
+  })
+}])
 app.controller('ListsController', function($scope, $location, Note, Patient, $q) {
   const notes = Note.list()
   const patients = Patient.list()
