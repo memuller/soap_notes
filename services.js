@@ -5,7 +5,7 @@
  class StoredObject {
 
    // keyname at which all objects will be stored under
-   static keyName() { return this.className }
+   static keyName() { return this.name }
 
    // constructor:
    // * sets all properties on given parameter as properties of this object;
@@ -58,7 +58,7 @@ app.factory('Note', function(){
 
 /* # Patients service
  */
-app.factory('Patients', function(){
+app.factory('Patient', function(){
 
   class Patient extends StoredObject {
 
