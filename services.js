@@ -98,11 +98,27 @@ app.factory('Note', ['Patient', function(Patient){
 
 /* # Patients service
  */
-app.factory('Patient', function(){
+app.factory('Patient', ['$injector', function($injector){
 
   class Patient extends StoredObject {
+
+    // returns this patient's notes
+    // uses depency injector, which isn't great.
+    notes(){
+      const notes = $injector.get('Note').fetch()
+      const id = this.id
+      return notes.filter((item) => item.patientId == id)
+    }
+
+    // property: number of Notes this patient has
+    // uses this.notes()
+    get numNotes(){
+      return this.notes().length
+    }
+
+
 
   }
 
   return Patient
-})
+}])
