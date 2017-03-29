@@ -74,14 +74,27 @@
 
 /* # Notes service
  */
-app.factory('Note', function(){
+app.factory('Note', ['Patient', function(Patient){
 
   class Note extends StoredObject {
 
+    // returs this note's Patient
+    patient(){
+      return this.object(Patient)
+    }
+
+    // overrides list() so that all Note objects listed
+    // already have their Patients pre-fetched.
+    static list(){
+      return super.list().map((item) => {
+        item.patient = item.patient()
+        return item
+      })
+    }
   }
 
   return Note
-})
+}])
 
 /* # Patients service
  */
