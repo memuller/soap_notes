@@ -1,0 +1,10 @@
+<section ng-controller='ListsController'>
+  <md-list-item class='md-2-line _md-button-wrap md-with-secondary md-clickable' ng-repeat="note in notes">
+    <ng-button>
+      <div class="md-list-item-text">
+        <h3>{{note.createdAt | date:'yy-mm-dd, H:mm'}}</h3>
+        <h4>{{note.patientName}}</h4>
+      </div>
+    </ng-button>
+  </md-list-item>
+</section>

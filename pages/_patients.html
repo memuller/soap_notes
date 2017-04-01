@@ -1,0 +1,9 @@
+<md-list class='flex'>
+  <md-list-item class='md-2-line _md-button-wrap md-with-secondary md-clickable' ng-repeat="patient in patients" ng-click='goToPatient(patient)'>
+    <div class="md-list-item-text">
+      <h3>{{patient.name}}</h3>
+      <h4>{{patient.numNotes}} notes</h4>
+    </div>
+    <md-button class="md-secondary" ng-click='goToPatient(note)'>Patient Notes</md-button>
+  </md-list-item>
+</md-list>

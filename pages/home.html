@@ -1,7 +1,7 @@
 <section id='search' ng-controller='ListsController as control'>
   <form ng-submit="$event.preventDefault()">
     <md-autocomplete
-    md-items="patient in patients(query)"
+    md-items="patient in patientsSearch(query)"
     md-no-cache='true'
     md-selected-item-change='newNote(patient)'
     md-selected-item='selected'
@@ -21,5 +21,5 @@
   </form>
 </section>
 <section id='log' ng-controller='ListsController' ng-include="listView">
-  
+
 </section>

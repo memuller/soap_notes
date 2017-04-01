@@ -1,0 +1,19 @@
+<section ng-controller='NoteViewController'>
+  <md-card>
+    <md-card-header>
+      <md-card-header-text>
+        <span class="md-title">{{note.createdAt | date:'yy-mm-dd, H:mm'}}</span>
+        <span class="md-subhead">{{note.patient().name}}</span>
+      </md-card-header-text>
+    </md-card-header>
+    <md-card-content>
+      <md-list-item class="md-3-line compact" ng-repeat="section in ['subjective', 'objective', 'assessment', 'plan']">
+        <div class="md-list-item-text compact">
+        <h3 class='caps'>{{section}}</h3>
+        <p>{{note[section]}}</p>
+        </div>
+      </md-list-item>
+    </md-card-content>
+
+  </md-card>
+</section>

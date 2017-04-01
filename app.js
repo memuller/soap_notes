@@ -3,14 +3,14 @@ const app = angular.module('SOAPNotes', ['ngRoute', 'ngMaterial', 'ngMdIcons'])
 app.config(($routeProvider, $locationProvider) => {
   $routeProvider
     .when('/', {
-      title:        'New Note',
+      title:        'Notes',
       controller:   'ListsController',
       templateUrl:  'pages/home.html'
     })
-    .when('/log', {
-      title:        'Notes by Date',
+    .when('/patients', {
+      title:        'Patients',
       controller:   'ListsController',
-      templateUrl:  'pages/log.html'
+      templateUrl:  'pages/home.html'
     })
     .when('/new/:patientId', {
       title:        'Creating Note',
@@ -21,6 +21,11 @@ app.config(($routeProvider, $locationProvider) => {
       title:        'Note',
       controller:   'NoteViewController',
       templateUrl:  'pages/noteView.html'
+    })
+    .when('/patient/:id', {
+      title:        'Patient',
+      controller:   'PatientViewController',
+      templateUrl:  'pages/patientView.html'
     })
 
   // would really prefer this, but it's not working right now.
@@ -38,12 +43,19 @@ app.run(['$rootScope', ($rootScope) => {
     }
   })
 }])
-app.controller('ListsController', function($scope, $location, Note, Patient, $q) {
+
+app.controller('ListsController', function($scope, $route, $location, Note, Patient, $q) {
+  if($route.current.$$route.originalPath == '/patients'){
+    $scope.listView = 'pages/_patients.html'
+  } else {
+    $scope.listView = 'pages/_list.html'
+  }
   const notes = Note.list()
   const patients = Patient.list()
 
   $scope.notes = notes
-  $scope.patients = (query) => {
+  $scope.patients = patients
+  $scope.patientsSearch = (query) => {
     return $q((resolve,reject) => {
       resolve(patients.filter((item) => item.name.includes(query)))
     })
@@ -56,14 +68,37 @@ app.controller('ListsController', function($scope, $location, Note, Patient, $q)
     patient.save()
     $location.path(`/new/${patient.id}`)
   }
-  $scope.goToPatient = (note) => console.log('not implemented')
+  $scope.goToPatient = (patient) => $location.path(`/patient/${patient.id}`)
+  $scope.focusSearch = () => console.log('not implemented')
 
 })
 
-app.controller('NotesController', function($scope) {
+app.controller('NoteCreationController', function($scope, $route, Note, Patient, $location) {
+  const note = {
+    patientId: parseInt($route.current.pathParams.patientId)
+  }
+  const patient = Patient.get(note.patientId)
 
+  $scope.note = note
+  $scope.patient = patient
+
+  $scope.newNote = () => {
+    const note = new Note($scope.note)
+    note.save()
+    $location.path(`/note/${note.id}`)
+  }
 })
 
-app.controller('SOAPController', function($scope) {
-  $scope.title = 'SOAP Notes'
+app.controller('NoteViewController', function($scope, $route, Note) {
+  const note = Note.get($route.current.pathParams.id)
+  $scope.note = note
+})
+
+app.controller('PatientViewController', function($scope, $route, $location, Patient) {
+  const patient = Patient.get($route.current.pathParams.id)
+  $scope.patient = patient
+  $scope.notes = patient.notes()
+
+  $scope.goToNote = (note) => $location.path(`/note/${note.id}`)
+  $scope.newNote = (patient) => $location.path(`/new/${patient.id}`)
 })

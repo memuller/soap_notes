@@ -1,0 +1,25 @@
+<section ng-controller='PatientViewController'>
+  <md-card>
+    <md-card-header>
+      <md-card-avatar>
+        <ng-md-icon icon='person' size='100%'></ng-md-icon>
+      </md-card-avatar>
+      <md-card-header-text>
+        <span class="md-headline">{{patient.name}}</span>
+        <span class="md-subhead">{{patient.numNotes}} notes</span>
+      </md-card-header-text>
+
+    </md-card-header>
+    <md-card-actions layout="row" layout-align="end center">
+      <md-button ng-click='newNote(patient)'>New Note</md-button>
+    </md-card-actions>
+    <md-card-content>
+      <md-card-title>
+        <md-card-title-text>
+          <span class="md-headline">Notes</span>
+        </md-card-title-text>
+      </md-card-title>
+      <div ng-include="'pages/_list.html'"></div>
+    </md-card-content>
+  </md-card>
+</section>
