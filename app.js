@@ -57,7 +57,8 @@ app.controller('ListsController', function($scope, $route, $location, Note, Pati
   $scope.patients = patients
   $scope.patientsSearch = (query) => {
     return $q((resolve,reject) => {
-      resolve(patients.filter((item) => item.name.includes(query)))
+      query = query.toLowerCase()
+      resolve(patients.filter((item) => item.name.toLowerCase().includes(query)))
     })
   }
 
