@@ -1,4 +1,4 @@
-const app = angular.module('SOAPNotes', ['ngRoute', 'ngMaterial', 'ngMdIcons'])
+const app = angular.module('SOAPNotes', ['ngRoute', 'ngMaterial', 'ngMdIcons', 'ngMessages'])
 
 app.config(($routeProvider, $locationProvider) => {
   $routeProvider
