@@ -1,13 +1,14 @@
 <section id='new' ng-controller='NoteCreationController' class='md-whiteframe-z1 page' layout-padding>
-  <form name='noteForm' ng-submit='newNote()'>
-    <md-input-container class='md-block'>
-      <label>Patient</label>
-      <input ng-model='patient.name' disabled>
-    </md-input-container>
+  <form novalidate name='noteForm' ng-submit='newNote()'>
+    <h3 class='md-headline'>New Note for {{patient.name}}</h3>
     <md-input-container class='md-block' ng-repeat="field in ['subjective', 'objective', 'assessment', 'plan']">
       <label class='caps'>{{field}}</label>
-      <textarea ng-model='note[field]' name="{{field}}" rows="4"></textarea>
+      <textarea ng-model='note[field]' ng-minlength='20' name="{{field}}" rows="3" required></textarea>
+      <div ng-messages="noteForm[field].$error">
+        <div ng-message="minlength">This field must be longer.</div>
+        <div ng-message="required">This field is required.</div>
+      </div>
     </md-input-container>
-    <md-button type="submit">Create Note</md-button>
+    <md-button type="submit" ng-disabled='noteForm.$invalid'>Create Note</md-button>
   </form>
 </section>
