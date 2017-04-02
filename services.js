@@ -74,7 +74,7 @@ class StoredObject {
 
 /* # Notes service
  */
-app.factory('Note', ['Patient', function(Patient){
+app.factory('Note', ['Patient', '$filter', function(Patient, $filter){
 
   class Note extends StoredObject {
 
@@ -90,6 +90,11 @@ app.factory('Note', ['Patient', function(Patient){
         item.patient = item.patient()
         return item
       })
+    }
+
+    // returns a properly formated Note timestamp.
+    get timestamp(){
+      return $filter('date')(this.createdAt, 'yy-MM-dd, H:mm')
     }
   }
 
