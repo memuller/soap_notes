@@ -3,7 +3,7 @@
     <h3 class='md-headline'>New Note for {{patient.name}}</h3>
     <md-input-container class='md-block' ng-repeat="field in ['subjective', 'objective', 'assessment', 'plan']">
       <label class='caps'>{{field}}</label>
-      <textarea ng-model='note[field]' ng-minlength='20' name="{{field}}" rows="3" required></textarea>
+      <textarea ng-model='note[field]' ng-minlength='15' name="{{field}}" rows="3" required></textarea>
       <div ng-messages="noteForm[field].$error">
         <div ng-message="minlength">This field must be longer.</div>
         <div ng-message="required">This field is required.</div>
