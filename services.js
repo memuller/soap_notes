@@ -110,7 +110,7 @@ app.factory('Patient', ['$injector', function($injector){
     // returns this patient's notes
     // uses depency injector, which isn't great.
     notes(){
-      const notes = $injector.get('Note').fetch()
+      const notes = $injector.get('Note').list()
       const id = this.id
       return notes.filter((item) => item.patientId == id)
     }
