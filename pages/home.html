@@ -11,7 +11,8 @@
   >
     <md-item-template>
       <span class="item-title">{{patient.name}}</span>
-      <md-button class='md-secondary' ng-click='goToPatient(patient.id)'>Notes</md-button>
+      <md-button class='md-secondary' ng-click='newNote(patient)'>New Note</md-button>
+      <md-button class='md-secondary' ng-click='goToPatient(patient)'>Notes</md-button>
     </md-item-template>
     <md-not-found>
       Patient named {{query}} not found.
