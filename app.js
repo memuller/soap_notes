@@ -99,6 +99,8 @@ app.controller('PatientViewController', function($scope, $route, $location, Pati
   $scope.patient = patient
   $scope.notes = patient.notes()
 
+  $scope.hidePatientLink = true
+
   $scope.goToNote = (note) => $location.path(`/note/${note.id}`)
   $scope.newNote = (patient) => $location.path(`/new/${patient.id}`)
 })

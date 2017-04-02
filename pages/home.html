@@ -20,6 +20,7 @@
   </md-autocomplete>
   </form>
 </section>
-<section id='log' ng-controller='ListsController' ng-include="listView">
-
+<section id='list' ng-controller='ListsController'>
+  <h1 class="md-headline">{{title.nav}}</h1>
+  <div ng-include="listView"></div>
 </section>

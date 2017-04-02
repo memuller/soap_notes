@@ -4,6 +4,6 @@
       <h3>{{note.createdAt | date:'yy-MM-dd, H:mm'}}</h3>
       <h4>{{note.patient.name}}</h4>
     </div>
-    <md-button class="md-secondary" ng-click='goToPatient(note.patient)'>Patient Notes</md-button>
+    <md-button class="md-secondary" ng-click='goToPatient(note.patient)' ng-hide='hidePatientLink'>Patient Notes</md-button>
   </md-list-item>
 </md-list>
