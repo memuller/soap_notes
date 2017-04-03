@@ -11,11 +11,13 @@
   >
     <md-item-template>
       <span class="item-title">{{patient.name}}</span>
-      <md-button class='md-secondary' ng-click='newNote(patient)'>New Note</md-button>
-      <md-button class='md-secondary' ng-click='goToPatient(patient)'>Notes</md-button>
+      <span class='pull-right'>
+        <md-button class='md-secondary' ng-click='newNote(patient)'>New Note</md-button>
+        <md-button class='md-secondary' ng-click='goToPatient(patient)'>Notes</md-button>
+      </span>
     </md-item-template>
     <md-not-found>
-      Patient named {{query}} not found.
+      Patient named not found.
       <md-button ng-click='createPatientAndGoToNewNote(query)'>Create it</md-button>
     </md-not-found>
   </md-autocomplete>
