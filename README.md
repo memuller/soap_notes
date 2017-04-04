@@ -1,8 +1,14 @@
 # SOAP Notes App
 
-This application is a simple SOAP note-taker.
+This application is a simple SOAP note-taker. You can access it [here](https://memuller.github.io/soap_notes)
 
 It's _not_ production-ready.
+
+## This App
+
+Type out the name of a Patient to create it (or access it, if you already have notes on it); them type out the four SOAP fields. Notes are stored and can be searched by Patient name. Notes can't be edited.
+
+The application is build using Angular; data is stored in browser's LocalStorage.
 
 ## About SOAP
 
@@ -42,9 +48,3 @@ no rash
 * Antibiotic eye drops, 2 drops each 3 times day for 7 days; Besifloxacin
 * Return exam in 7-10 days.
 * Child should be kept away from daycare and social contact until return exam.
-
-## This App
-
-Type out the name of a Patient to create it (or access it, if you already have notes on it); them type out the four SOAP fields. Notes are stored and can be searched by Patient name. Notes can't be edited.
-
-The application is build using Angular; data is stored in browser's LocalStorage.
