@@ -23,7 +23,12 @@
   </md-autocomplete>
   </form>
 </section>
-<section id='list' ng-controller='ListsController'>
+
+<section id='empty' md-color="::{background: 'red-primary'}" ng-show='!notes.length'>
+    No notes here; create one by typing a Patient's name above.
+</section>
+
+<section id='list' ng-controller='ListsController' ng-if='notes.length'>
   <h1 class="md-headline">{{title.nav}}</h1>
   <div ng-include="listView"></div>
 </section>
